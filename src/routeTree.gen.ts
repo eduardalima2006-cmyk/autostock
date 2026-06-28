@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VendasRouteImport } from './routes/vendas'
 import { Route as FuncionariosRouteImport } from './routes/funcionarios'
+import { Route as FinanceiroRouteImport } from './routes/financeiro'
 import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -22,6 +23,11 @@ const VendasRoute = VendasRouteImport.update({
 const FuncionariosRoute = FuncionariosRouteImport.update({
   id: '/funcionarios',
   path: '/funcionarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceiroRoute = FinanceiroRouteImport.update({
+  id: '/financeiro',
+  path: '/financeiro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EstoqueRoute = EstoqueRouteImport.update({
@@ -38,12 +44,14 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/estoque': typeof EstoqueRoute
+  '/financeiro': typeof FinanceiroRoute
   '/funcionarios': typeof FuncionariosRoute
   '/vendas': typeof VendasRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/estoque': typeof EstoqueRoute
+  '/financeiro': typeof FinanceiroRoute
   '/funcionarios': typeof FuncionariosRoute
   '/vendas': typeof VendasRoute
 }
@@ -51,20 +59,28 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/estoque': typeof EstoqueRoute
+  '/financeiro': typeof FinanceiroRoute
   '/funcionarios': typeof FuncionariosRoute
   '/vendas': typeof VendasRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/estoque' | '/funcionarios' | '/vendas'
+  fullPaths: '/' | '/estoque' | '/financeiro' | '/funcionarios' | '/vendas'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/estoque' | '/funcionarios' | '/vendas'
-  id: '__root__' | '/' | '/estoque' | '/funcionarios' | '/vendas'
+  to: '/' | '/estoque' | '/financeiro' | '/funcionarios' | '/vendas'
+  id:
+    | '__root__'
+    | '/'
+    | '/estoque'
+    | '/financeiro'
+    | '/funcionarios'
+    | '/vendas'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EstoqueRoute: typeof EstoqueRoute
+  FinanceiroRoute: typeof FinanceiroRoute
   FuncionariosRoute: typeof FuncionariosRoute
   VendasRoute: typeof VendasRoute
 }
@@ -83,6 +99,13 @@ declare module '@tanstack/react-router' {
       path: '/funcionarios'
       fullPath: '/funcionarios'
       preLoaderRoute: typeof FuncionariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/financeiro': {
+      id: '/financeiro'
+      path: '/financeiro'
+      fullPath: '/financeiro'
+      preLoaderRoute: typeof FinanceiroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/estoque': {
@@ -105,6 +128,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EstoqueRoute: EstoqueRoute,
+  FinanceiroRoute: FinanceiroRoute,
   FuncionariosRoute: FuncionariosRoute,
   VendasRoute: VendasRoute,
 }
