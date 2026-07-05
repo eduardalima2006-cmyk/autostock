@@ -1,4 +1,6 @@
 https://github.com/eduardalima2006-cmyk/autostock.git
+Senha financeiro:financeiro123
+Senha vendas:equipe123
 1.Introdução
 No dinâmico mercado de revenda de veículos semi-novos e usados, a agilidade na tomada de
 decisão e o controle preciso do estoque são os principais diferenciais competitivos. O
